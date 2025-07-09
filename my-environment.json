@@ -1,0 +1,535 @@
+{
+  "uuid": "af8a6f2e-0202-4a05-9bf7-85bd6e257143",
+  "lastMigration": 33,
+  "name": "Orchestration Task API",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "d4625431-6be2-48db-8e8f-efc0adc36e56",
+      "type": "http",
+      "documentation": "Get all orchestration tasks items",
+      "method": "get",
+      "endpoint": "tasks",
+      "responses": [
+        {
+          "uuid": "8089005e-9bdb-45c6-bf23-3e32fe6fd91a",
+          "body": "[\n  {{#repeat 25 90}}\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"owner\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n    \"name\": \"{{oneOf (array 'Create' 'Configure' 'Change' 'Prepare' 'Set up')}} {{oneOf (array 'sales' 'reseller' 'Operator' 'Dealer' 'Department' 'channel')}} {{oneOf (array 'id' 'code' 'keys')}}\",\n    \"description\": \"{{faker 'lorem.sentence' 20 25}}\",\n    \"status\": \"{{faker 'helpers.arrayElement' (array 'Completed' 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n    \"subStatus\": \"{{faker 'helpers.arrayElement' (array 'Requirements Defined' 'Assigned' 'Developing' 'Awaiting Approval' 'In QA' 'Blocked' 'Deployed')}}\",\n    \"isEscalated\": {{faker 'datatype.boolean'}},\n    \"milestone\": \"{{faker 'helpers.arrayElement' (array 'Pre-Config' 'Rate Pan' 'Connectivity' 'Testing' 'Contracts' 'Live')}}\",\n    \"assignedTo\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n    \"dueDate\": \"{{dateFormat (faker 'date.soon' days=14) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n    \"createdDate\": \"{{dateFormat (faker 'date.recent' days=365) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"createdBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\"\n  }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of orchestration tasks items",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "42b2d00e-7779-4f20-9c42-1add9ad959d2",
+      "type": "http",
+      "documentation": "Get a specific orchestration tasks item by ID",
+      "method": "get",
+      "endpoint": "tasks/:id",
+      "responses": [
+        {
+          "uuid": "55309b87-9118-4b2c-a1a9-693592c626f4",
+          "body": "{\n  \"id\": {{{urlParam 'id'}}},\n  \"owner\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n  \"name\": \"{{oneOf (array 'Create' 'Configure' 'Change' 'Prepare' 'Set up')}} {{oneOf (array 'sales' 'reseller' 'Operator' 'Dealer' 'Department' 'channel')}} {{oneOf (array 'id' 'code' 'keys')}}\",\n  \"description\": \"{{faker 'lorem.sentence' 20 25}}\",\n  \"status\": \"{{faker 'helpers.arrayElement' (array 'Completed' 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n    \"subStatus\": \"{{faker 'helpers.arrayElement' (array 'Requirements Defined' 'Assigned' 'Developing' 'Awaiting Approval' 'In QA' 'Blocked' 'Deployed')}}\",\n  \"isEscalated\": {{faker 'datatype.boolean'}},\n  \"milestone\": \"{{faker 'helpers.arrayElement' (array 'Pre-Config' 'Rate Pan' 'Connectivity' 'Testing' 'Contracts' 'Live')}}\",\n  \"assignedTo\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n  \"dueDate\": \"{{dateFormat (faker 'date.soon' days=14) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n  \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n  \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n  \"createdDate\": \"{{dateFormat (faker 'date.recent' days=365) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n  \"createdBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The orchestration tasks item",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6be3d8ea-4c02-4784-bce4-8c56db2c83c2",
+          "body": "",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "orchestration tasks item not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "e7fd1eb4-f4ed-4e06-9b45-7e45df088e91",
+      "type": "http",
+      "documentation": "Update fields of an orchestration tasks item by ID",
+      "method": "patch",
+      "endpoint": "tasks/:id",
+      "responses": [
+        {
+          "uuid": "092f3d39-803a-491d-82c6-a88914ab6ac6",
+          "body": "{\n  \"id\": {{{urlParam 'id'}}},\n  \"owner\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n  \"name\": \"{{oneOf (array 'Create' 'Configure' 'Change' 'Prepare' 'Set up')}} {{oneOf (array 'sales' 'reseller' 'Operator' 'Dealer' 'Department' 'channel')}} {{oneOf (array 'id' 'code' 'keys')}}\",\n  \"description\": \"{{faker 'lorem.sentence' 20 25}}\",\n  \"status\": \"{{faker 'helpers.arrayElement' (array 'Completed' 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n  \"subStatus\": \"{{faker 'helpers.arrayElement' (array 'Requirements Defined' 'Assigned' 'Developing' 'Awaiting Approval' 'In QA' 'Blocked' 'Deployed')}}\",\n  \"isEscalated\": {{faker 'datatype.boolean'}},\n  \"milestone\": \"{{faker 'helpers.arrayElement' (array 'Pre-Config' 'Rate Pan' 'Connectivity' 'Testing' 'Contracts' 'Live')}}\",\n  \"assignedTo\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n  \"dueDate\": \"{{dateFormat (faker 'date.soon' days=14) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n  \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n  \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n  \"createdDate\": \"{{dateFormat (faker 'date.recent' days=365) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n  \"createdBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "orchestration tasks item updated successfully",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ddd910d0-f5a1-460a-a19a-a18c373a4632",
+          "body": "",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "orchestration tasks item not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "e6b96779-348f-4ca9-a385-3c0ff5ddea69",
+      "type": "http",
+      "documentation": "Get all Orchestration Task Comments",
+      "method": "get",
+      "endpoint": "task/:id/comments",
+      "responses": [
+        {
+          "uuid": "22a685da-bac1-41d9-9a19-0bc5718427af",
+          "body": "[\n  {{#repeat 2 10}}\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"title\": \"{{oneOf (array 'Contract review' 'VAT compliance' 'ZTAR account status' 'MVNA onboarding checklist' 'PEAK data eligibility' 'Entity verification' 'Registration update')}}\",\n    \"comment\": \"{{oneOf (array 'Pending legal teams confirmation if current MVNA contracts under ZTAR are valid for PEAK Data onboarding.' 'Awaiting response from finance team (Sashidhar/John) regarding VAT registration eligibility under ZTAR for PEAK Data.' 'Need confirmation from John/Sashidhar if ZTAR account setup meets PEAKs MVNA qualification criteria.' 'Review pending with Sashidhar on whether all onboarding items, including tax documents under ZTAR, are complete for PEAK.' 'Awaiting validation from John if current ZTAR setup fulfills the PEAK Data compliance requirements.' 'Pending internal confirmation from Sashidhar on whether ZTAR qualifies as a valid entity for PEAK as MVNA.' 'Follow-up required with John/Sashidhar to confirm if latest TAX registrations under ZTAR are aligned with PEAK onboarding needs')}}\",\n    \"status\": \"{{faker 'helpers.arrayElement' (array 'Completed' 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n    \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n    \"createdDate\": \"{{dateFormat (faker 'date.recent' days=365) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"createdBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\"\n  }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of Orchestration Task Comments",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "339e0b19-863c-47b4-a4dc-a06eb9a0b93b",
+      "type": "http",
+      "documentation": "Create a new Orchestration Task Comment",
+      "method": "post",
+      "endpoint": "task/:id/comments",
+      "responses": [
+        {
+          "uuid": "e39e3777-c73f-449e-8fab-dc8c481cdffc",
+          "body": "{\n    \"id\": {{faker 'number.int' max=99999}},\n    \"title\": \"{{oneOf (array 'Contract review' 'VAT compliance' 'ZTAR account status' 'MVNA onboarding checklist' 'PEAK data eligibility' 'Entity verification' 'Registration update')}}\",\n    \"comment\": \"{{oneOf (array 'Pending legal teams confirmation if current MVNA contracts under ZTAR are valid for PEAK Data onboarding.' 'Awaiting response from finance team (Sashidhar/John) regarding VAT registration eligibility under ZTAR for PEAK Data.' 'Need confirmation from John/Sashidhar if ZTAR account setup meets PEAKs MVNA qualification criteria.' 'Review pending with Sashidhar on whether all onboarding items, including tax documents under ZTAR, are complete for PEAK.' 'Awaiting validation from John if current ZTAR setup fulfills the PEAK Data compliance requirements.' 'Pending internal confirmation from Sashidhar on whether ZTAR qualifies as a valid entity for PEAK as MVNA.' 'Follow-up required with John/Sashidhar to confirm if latest TAX registrations under ZTAR are aligned with PEAK onboarding needs')}}\",\n    \"status\": \"{{faker 'helpers.arrayElement' (array 'Completed' 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n    \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n    \"createdDate\": \"{{dateFormat (faker 'date.recent' days=365) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"createdBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Orchestration Task Comment created successfully",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2f76c0a4-6896-4c3c-b81e-1626c39659c9",
+      "type": "http",
+      "documentation": "Get a specific Orchestration Task Comment by ID",
+      "method": "get",
+      "endpoint": "task/comments/:id",
+      "responses": [
+        {
+          "uuid": "bc5f8f7c-78c3-417e-9ba2-7a9598daa8e7",
+          "body": "{\n    \"id\": {{urlParam 'id'}},\n    \"title\": \"{{oneOf (array 'Contract review' 'VAT compliance' 'ZTAR account status' 'MVNA onboarding checklist' 'PEAK data eligibility' 'Entity verification' 'Registration update')}}\",\n    \"comment\": \"{{oneOf (array 'Pending legal teams confirmation if current MVNA contracts under ZTAR are valid for PEAK Data onboarding.' 'Awaiting response from finance team (Sashidhar/John) regarding VAT registration eligibility under ZTAR for PEAK Data.' 'Need confirmation from John/Sashidhar if ZTAR account setup meets PEAKs MVNA qualification criteria.' 'Review pending with Sashidhar on whether all onboarding items, including tax documents under ZTAR, are complete for PEAK.' 'Awaiting validation from John if current ZTAR setup fulfills the PEAK Data compliance requirements.' 'Pending internal confirmation from Sashidhar on whether ZTAR qualifies as a valid entity for PEAK as MVNA.' 'Follow-up required with John/Sashidhar to confirm if latest TAX registrations under ZTAR are aligned with PEAK onboarding needs')}}\",\n    \"status\": \"{{faker 'helpers.arrayElement' (array 'Completed' 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n    \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\",\n    \"createdDate\": \"{{dateFormat (faker 'date.recent' days=365) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"createdBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The Orchestration Task Comment",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "2b76aec3-5d85-41cc-9424-49a6239cecda",
+          "body": "",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Orchestration Task Comment not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "9617dedf-8329-4374-b485-44e8eb0821c3",
+      "type": "http",
+      "documentation": "Update a Orchestration Task Comment by ID",
+      "method": "patch",
+      "endpoint": "task/comments/:id",
+      "responses": [
+        {
+          "uuid": "9f632d3f-fd5a-4d5d-87cb-7ad5b40822ab",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Orchestration Task Comment updated successfully",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "773564cf-a254-447c-961c-6e4e7f2889be",
+          "body": "",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Orchestration Task Comments item not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "86b6b2f8-424c-47b0-ad16-201365c31ecc",
+      "type": "http",
+      "documentation": "Delete a Orchestration Task Comments item by ID",
+      "method": "delete",
+      "endpoint": "task/comments/:id",
+      "responses": [
+        {
+          "uuid": "66f70a82-c4ca-466a-bf56-cab8b7c044a8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "Orchestration Task Comments item deleted successfully",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "bdb4126e-03a3-415f-82ef-353deca7299b",
+          "body": "",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Orchestration Task Comments item not found",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "331186b2-57f5-4dfd-986d-6e7d73bf9cdc",
+      "type": "http",
+      "documentation": "Get all Orchestration Task Audit Trails",
+      "method": "get",
+      "endpoint": "task/:id/audit-trail",
+      "responses": [
+        {
+          "uuid": "a1625468-a64d-4930-91b1-fec3ad903302",
+          "body": "[\n   {{#repeat 5 20}}\n  {\n    \"id\": {{faker 'number.int' max=99999}},\n    \"field\": \"{{oneOf (array 'Department Code' 'Employee Id' 'Project Code' 'Location Code' 'Approval Status')}}\",\n    \"previousValue\": \"{{oneOf (array 'Resolution Required' 'In Progress' 'Awaiting completion' 'Pending')}}\",\n    \"newValue\": \"{{oneOf (array 'Resolved' 'Completed' 'Closed' 'Tested')}}\",\n    \"updatedDate\": \"{{dateFormat (faker 'date.recent' days=5) \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\"}}\",\n    \"updatedBy\": \"{{{faker 'person.firstName'}}} {{{faker 'person.lastName'}}} {{faker 'person.lastName'}}\"\n  }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of Orchestration Task Audit Trails",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "d4625431-6be2-48db-8e8f-efc0adc36e56"
+    },
+    {
+      "type": "route",
+      "uuid": "42b2d00e-7779-4f20-9c42-1add9ad959d2"
+    },
+    {
+      "type": "route",
+      "uuid": "e7fd1eb4-f4ed-4e06-9b45-7e45df088e91"
+    },
+    {
+      "type": "route",
+      "uuid": "e6b96779-348f-4ca9-a385-3c0ff5ddea69"
+    },
+    {
+      "type": "route",
+      "uuid": "339e0b19-863c-47b4-a4dc-a06eb9a0b93b"
+    },
+    {
+      "type": "route",
+      "uuid": "2f76c0a4-6896-4c3c-b81e-1626c39659c9"
+    },
+    {
+      "type": "route",
+      "uuid": "9617dedf-8329-4374-b485-44e8eb0821c3"
+    },
+    {
+      "type": "route",
+      "uuid": "86b6b2f8-424c-47b0-ad16-201365c31ecc"
+    },
+    {
+      "type": "route",
+      "uuid": "331186b2-57f5-4dfd-986d-6e7d73bf9cdc"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  mockoon:
+    image: mockoon/cli:latest
+    container_name: mockoon-mock-server
+    volumes:
+      - ./my-environment.json:/data/environment.json
+    ports:
+      - "3000:3000"   # Adjust if your env uses a different port
+    command: ["-d", "/data/environment.json", "--port", "3000"]
